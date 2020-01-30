@@ -1,2 +1,2 @@
-#!/bin/bash
-sudo chown chgrp holberton hello
+#!iain/bash
+sudo chgrp holberton hello
