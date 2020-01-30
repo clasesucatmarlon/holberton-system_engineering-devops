@@ -1,2 +1,2 @@
 #!/bin/bash
-chown cngrp holberton hello
+chown chgrp holberton hello
