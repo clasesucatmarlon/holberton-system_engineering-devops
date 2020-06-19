@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-Bash script that displays Holberton School 10 times
+#Bash script that displays Holberton School 10 times
 iterator=0
 until ((iterator>=10))
 do
     echo "Holberton School"
-    let iterator++
+    let iterator+=1
 done
