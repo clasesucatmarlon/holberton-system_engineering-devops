@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Bash script that displays numbers from 1 to 20 based in contditions
+iterator=1
+while ((iterator<=20))
+do
+    echo $iterator
+    case $iterator in
+        4) echo "bad luck from China"
+		;;
+        9) echo "bad luck from Japan"
+		;;
+        17) echo "bad luck from Italy"
+		;;
+    esac
+    let iterator+=1
+done
