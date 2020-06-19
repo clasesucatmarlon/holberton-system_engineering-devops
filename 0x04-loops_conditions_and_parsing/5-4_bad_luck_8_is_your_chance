@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Bash script that loops from 1 to 10 based in conditions
+iterator=1
+while ((iterator<=10))
+do
+    if ((iterator==4))
+    then
+        echo "bad luck"
+    elif ((iterator==8))
+    then
+        echo "good luck"
+    else
+        echo "Holberton School"
+    fi
+let iterator=iterator+1
+done
