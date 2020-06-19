@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Bash script that displays Holberton School 10 times using loop for
+for ((var = 1; var <= 10; var++)); do echo "Holberton School"; done
