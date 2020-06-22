@@ -13,8 +13,19 @@ function f_sigterm {
     exit
 }
 
-trap f_sigterm SIGTERM
+function f_sigint {
+    echo "Y U no love me?!"
+    exit
+}
 
+function f_sigquit {
+    sudo rm -R /var/run/holbertonscript.pid
+    exit
+}
+
+trap f_sigterm SIGTERM
+trap f_sigint SIGINT
+trap f_sigquit SIGQUIT
 
 while true
 do
