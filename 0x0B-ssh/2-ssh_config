@@ -1,1 +1,6 @@
 #!/usr/bin/env bash
+# Share your SSH client configuration in your answer file
+
+host 34.74.35.201
+  PasswordAuthentication no
+  IdentityFile ~/.ssh/holberton
