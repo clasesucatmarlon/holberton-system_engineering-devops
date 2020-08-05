@@ -3,7 +3,7 @@
 # sudo sh -c 'echo "Holberton School" > /usr/share/nginx/html'
 
 apt-get update
-apt-get -y install nginx-full
+apt-get -y install nginx
 sudo systemctl restart nginx
 
 echo "Holberton School" | sudo tee /var/www/html/index.html
