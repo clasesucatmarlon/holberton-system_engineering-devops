@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: black;
+}
+
+.imagen {
+    display: block;
+    margin: auto;
+}
+
+.error {
+    background: white;
+    color: black;
+    font-size: 9em;
+    text-align: center;
+    text-shadow: 3px 3px 3px grey;
+}
+
+.error2 {
+    background: white;
+    color: black;
+    font-size: 3em;
+    text-align: center;
+    text-shadow: 3px 3px 3px grey;
+}
