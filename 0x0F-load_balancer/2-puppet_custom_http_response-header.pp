@@ -1,34 +1,33 @@
-exec { 'apt-get-update':
-  command => '/usr/bin/apt-get update',
+# configure all the previous tasks but with Puppet
+$host_name = generate('/bin/uname', '--nodename')
+$nginx_site_config = "server {
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+	root /var/www/html;
+	add_header X-Served-By ${host_name};
+	location /redirect_me {
+		return 301 http://example.com/;
+	}
+}"
+package { 'Nginx installation':
+  ensure => latest,
+  name   => 'nginx'
 }
-
-package { 'nginx':
-  ensure  => installed,
-  require => Exec['apt-get-update'],
-}
-
-file_line { 'config redirect':
-  ensure  => 'present',
+file { 'Nginx site configuration':
+  ensure  => file,
+  require => Package['nginx'],
   path    => '/etc/nginx/sites-available/default',
-  after   => 'listen 80 default_server;',
-  line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
-  require => Package['nginx'],
+  content => $nginx_site_config
 }
-
-file_line { 'config name':
-  ensure  => 'present',
-  path    => '/etc/nginx/sites-available/default',
-  after   => 'listen 80 default_server;',
-  line    => 'add_header X-Served-By $hostname;',
+file { 'site index':
+  ensure  => file,
   require => Package['nginx'],
+  path    => '/var/www/html/index.html',
+  content => "Holberton School\n"
 }
-
-file { '/var/www/html/index.html':
-  content => 'Holberton School',
-  require => Package['nginx'],
-}
-
-service { 'nginx':
-  ensure  => running,
-  require => Package['nginx'],
+service { 'Nginx service':
+  ensure    => running,
+  name      => 'nginx',
+  enable    => true,
+  subscribe => File['/etc/nginx/sites-available/default']
 }
