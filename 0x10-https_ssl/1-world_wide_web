@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 # Information about domains owner
-sub_domains(){
-LIST=( "www" "lb-01" "web-01" "web-02" )
-if [ $# -eq 2 ] ; then
-    echo -n "The subdomain $2 "
-    dig $2.$1 | grep -A1 'ANSWER SECTION:' | grep -v 'ANSWER SECTION:' | awk '{print "is a", $4, "record and points to", $5}'
-else
-    for i in "${LIST[@]}" ; do
-	echo -n "The subdomain $i "
-	dig $i.$1 | grep -A1 'ANSWER SECTION:' | grep -v 'ANSWER SECTION:' | awk '{print "is a", $4, "record and points to", $5}'
-    done
-fi
+sub_domains()
+{
+    register=$(dig $i.$1 | awk '/ANSWER SECTION:/ {getline; print $4}')
+    ip=$(dig $i.$1 | awk '/ANSWER SECTION:/ {getline; print $5}')
 }
-
-sub_domains "$1" "$2"
+if [ -z $2 ]; then
+    for i in "www" "lb-01" "web-01" "web-02"; do
+	sub_domains $1
+	echo "The subdomain $i is a $register record and points to $ip"
+    done
+else
+    i=$2
+    sub_domains $1
+    echo "The subdomain $i is a $register record and points to $ip"
+fi
