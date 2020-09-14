@@ -15,7 +15,7 @@ if __name__ == "__main__":
     employee = requests.get(url + 'users/' + user_id)
     employee = employee.json()
 
-    task = requests.get(url + "todos?userID=" + user_id)
+    task = requests.get(url + "todos?userId=" + user_id)
     task = task.json()
 
     list_task_done = []
