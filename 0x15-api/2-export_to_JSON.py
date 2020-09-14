@@ -2,9 +2,9 @@
 """
 export data in the JSON format
 """
-import requests
 from sys import argv
 import json
+import requests
 
 
 if __name__ == "__main__":
