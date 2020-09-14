@@ -9,26 +9,25 @@ from sys import argv
 if __name__ == "__main__":
     """ Return employees and task
     """
-    url = 'https://jsonplaceholder.typicode.com/'
+    complete_task = 0
+    url = 'https://jsonplaceholder.typicode.com'
     user_id = argv[1]
 
-    employee = requests.get(url + 'users/' + user_id)
-    employee = employee.json()
+    value1 = requests.get(url + '/todos')
+    value2 = requests.get(url + '/users')
 
-    task = requests.get(url + "todos?userId=" + user_id)
-    task = task.json()
+    for todo_dict in value1.json():
+        if todo_dict.get('userId') == int(user_id) and \
+                todo_dict.get('completed') is True:
+            complete_task += 1
 
-    list_task_done = []
+    for user_dict in value2.json():
+        if user_dict.get('id') == int(user_id):
+            user = user_dict.get('name')
 
-    for counter in task:
-        if counter.get("completed") is True:
-            list_task_done.append(counter)
+    print("Employee {} is done with task({}/20):".format(user, complete_task))
 
-    task_done = len(list_task_done)
-    task_total = len(task)
-
-    print("Employee {} is done with task({}/{}):".format(
-        employee.get('name'), task_done, task_total))
-
-    for count in list_task_done:
-        print('\t {}'.format(count.get('title')))
+    for todo_dict in value1.json():
+        if todo_dict.get('userId') == int(user_id) and \
+                todo_dict.get('completed') is True:
+            print('\t {}'.format(todo_dict.get('title')))
