@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """ count word
-from collections import Counter, defaultdict
 """
-import collections
+from collections import Counter, defaultdict
 import requests
 
 
