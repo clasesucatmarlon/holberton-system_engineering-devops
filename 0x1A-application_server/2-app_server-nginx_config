@@ -1,1 +1,18 @@
-#!/usr/bin/env bash
+# Serve a page with Nginx
+server {
+    listen 80 default_server;
+    location /hbnb_static/ { alias /data/web_static/current/;}
+    add_header X-Served-By "1595-web-01";
+    error_page 404 /custom_404.html; location = /custom_404.html {root /usr/share/nginx/html; internal;}
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name 34.74.35.201;
+
+    location = /airbnb-onepage/ {
+        proxy_pass http://localhost:5000/airbnb-onepage/;
+    }
+}
